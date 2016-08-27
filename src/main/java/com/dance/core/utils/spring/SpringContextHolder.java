@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.dance.core.utils.AssertUtils;
 
@@ -82,7 +83,11 @@ public class SpringContextHolder implements ApplicationContextAware,
 	 * 检查ApplicationContext不为空.
 	 */
 	private static void assertContextInjected() {
+		try{
 		AssertUtils.state(applicationContext != null,
 		"applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
+		}catch(IllegalStateException e){
+			applicationContext= new ClassPathXmlApplicationContext("applicationContext.xml");
+		}
 	}
 }
