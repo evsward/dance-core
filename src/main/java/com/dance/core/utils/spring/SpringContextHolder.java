@@ -86,6 +86,7 @@ public class SpringContextHolder implements ApplicationContextAware,
 		try{
 		AssertUtils.state(applicationContext != null,
 		"applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
+		// 这就是我初接手服务端，不断创建applicationContext的症结所在。要在applicationContext中定义本类SpringContextHolder。
 		}catch(IllegalStateException e){
 			applicationContext= new ClassPathXmlApplicationContext("applicationContext.xml");
 		}
